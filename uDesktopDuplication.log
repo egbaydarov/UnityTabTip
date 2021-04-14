@@ -1,0 +1,16 @@
+[uDD::Log][2021-04-14 23:00:31] Start
+[uDD::Log][2021-04-14 23:00:31] OS Version    : 10.0
+[uDD::Log][2021-04-14 23:00:31] Build Number  : 19041
+[uDD::Log][2021-04-14 23:00:31] Service Pack  : 
+[uDD::Log][2021-04-14 23:00:31] Graphics Card [0] : NVIDIA GeForce GTX 1060 6GB
+[uDD::Log][2021-04-14 23:00:31]   > Monitor[0] : \\.\DISPLAY1
+[uDD::Log][2021-04-14 23:00:31] Graphics Card [1] : Microsoft Basic Render Driver
+[uDD::Log][2021-04-14 23:00:31] Monitor::Initialized() =>
+[uDD::Log][2021-04-14 23:00:31]     ID    : 0
+[uDD::Log][2021-04-14 23:00:31]     Size  : (1920, 1080)
+[uDD::Log][2021-04-14 23:00:31]     DPI   : (102, 102)
+[uDD::Log][2021-04-14 23:00:31]     Rot   : Landscape
+[uDD::Log][2021-04-14 23:00:31] Duplicator::Initialize() => OK.
+[uDD::Err][2021-04-14 23:00:31] Monitor::GetBuffer() => CopyTextureFromGpuToCpu() has not been called yet.
+[uDD::Err][2021-04-14 23:00:31] Monitor::GetBuffer() => CopyTextureFromGpuToCpu() has not been called yet.
+[uDD::Log][2021-04-14 23:00:46] Stop

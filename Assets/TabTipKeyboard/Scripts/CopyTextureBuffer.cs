@@ -56,6 +56,7 @@ public class CopyTextureBuffer : MonoBehaviour
         var xLeft = cap.z;
         var xRight = cap.w;
         var color = texture_.GetPixel(colorCoords.x, colorCoords.y);
+        var rectangle = new Rect(xLeft, yUp, xRight - xLeft, yDown - yUp);
 
         var texture = new Texture2D(width, height, TextureFormat.ARGB32, false);
         texture_.filterMode = FilterMode.Bilinear;
@@ -65,7 +66,7 @@ public class CopyTextureBuffer : MonoBehaviour
 
         var tempGo = new GameObject();
         UnityEngine.UI.Image capImage = tempGo.AddComponent<UnityEngine.UI.Image>();
-        capImage.sprite = Sprite.Create(texture_, GetKeyboardRectangle(), new Vector2(0, 0));
+        capImage.sprite = Sprite.Create(texture_, rectangle, new Vector2(0, 0));
         tempGo.GetComponent<RectTransform>().SetParent(this.transform);
         tempGo.SetActive(true);
 

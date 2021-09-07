@@ -7,7 +7,6 @@ public class EnableDisableCalibrationTips : MonoBehaviour
 {
     List<GameObject> children;
 
-
     private void Awake()
     {
         children = gameObject.GetChildren();
@@ -25,8 +24,6 @@ public class EnableDisableCalibrationTips : MonoBehaviour
     {
         StartCoroutine(UpdateTipsState(IsEnabled));
     }
-
-    
 
     IEnumerator UpdateTipsState(bool IsEnabled)
     {

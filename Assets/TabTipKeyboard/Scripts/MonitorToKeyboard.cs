@@ -22,6 +22,12 @@ public class MonitorToKeyboard : MonoBehaviour
     [SerializeField]
     List<Vector4> Caps = new List<Vector4>();
 
+    [SerializeField]
+    int[] xColor = new int[1000];
+
+    [SerializeField]
+    int[] yColor = new int[1000];
+
     UnityEvent OnSpaceUp = new UnityEvent();
 
     CursorMovement cursorData;
@@ -33,6 +39,7 @@ public class MonitorToKeyboard : MonoBehaviour
 
     public void RunCalibrate()
     {
+        Caps.Clear();
         tipsDisabler.EnableDisableTips(true);
 
         int pointsCounter = 0;
@@ -71,14 +78,52 @@ public class MonitorToKeyboard : MonoBehaviour
 
     public void AddCap()
     {
-        //TODO
+        tipsDisabler.EnableDisableTips(true);
+
+        int pointsCounter = 0;
+        var vals = new Vector2Int[5];
+        var tips = new string[]
+        {
+            "Put mouse pointer to upper border of cap then press Space button",
+            "Put mouse pointer to down border of cap then press Space button",
+            "Put mouse pointer to left border of cap then press Space button",
+            "Put mouse pointer to right border of cap then press Space button",
+            "Put mouse pointer to pixel with cap color then press Space button",
+            "Successful!"
+        };
+        TextTip.text = tips[pointsCounter];
+        TextTip.text = tips[pointsCounter];
+
+        OnSpaceUp.RemoveAllListeners();
+        OnSpaceUp.AddListener(() =>
+        {
+            vals[pointsCounter++] = new Vector2Int(cursorData.pointInstance.X, cursorData.pointInstance.Y);
+            TextTip.text = tips[pointsCounter];
+
+            if (pointsCounter == 5)
+            {
+                Vector4 vec;
+                vec.x = vals[0].y;
+                vec.y = vals[1].y;
+                vec.z = vals[2].x;
+                vec.w = vals[3].x;
+                xColor[Caps.Count] = vals[4].x;
+                yColor[Caps.Count] = vals[4].y;
+                Caps.Add(vec);
+
+                keyboardTexture.AddCap(vec, new Vector2Int(vals[4].x, vals[4].y));
+                tipsDisabler.EnableDisableTips(false);
+                OnSpaceUp.RemoveAllListeners();
+                SaveCalibratedData();
+            }
+        });
     }
 
     void Start()
     {
         LoadCalibratedData();
         keyboardTexture.UpdateTexutreWithBorders(yUpSplit, yDownSplit, xLeftSplit, xRightSplit);
-
+        keyboardTexture.LoadAllCaps(Caps, yColor, xColor);
     }
 
     private void Awake()
@@ -116,7 +161,7 @@ public class MonitorToKeyboard : MonoBehaviour
     {
         BinaryFormatter bf = new BinaryFormatter();
 
-        CalibrationData data = new CalibrationData(yUpSplit, xRightSplit, yDownSplit, xLeftSplit, Caps);
+        CalibrationData data = new CalibrationData(yUpSplit, xRightSplit, yDownSplit, xLeftSplit, Caps, xColor, yColor);
 
         using (FileStream stream = new FileStream(Application.persistentDataPath + FileName, FileMode.Open))
         {
@@ -143,6 +188,8 @@ public class MonitorToKeyboard : MonoBehaviour
             xRightSplit = data.xRightSplit;
             yDownSplit = data.yDownSplit;
             xLeftSplit = data.xLeftSplit;
+            xColor = data.xColor;
+            yColor = data.yColor;
             Debug.Log("Calibration data loaded!");
         }
         else
@@ -160,6 +207,8 @@ class CalibrationData
 
     [SerializeField]
     public Vector4Serializsable[] Caps;
+    public int[] xColor;
+    public int[] yColor;
 
     public List<Vector4> getUnityVectors()
     {
@@ -169,7 +218,7 @@ class CalibrationData
         return vectors;
     }
 
-    public CalibrationData(int yUpSplit, int xRightSplit, int yDownSplit, int xLeftSplit, List<Vector4> caps)
+    public CalibrationData(int yUpSplit, int xRightSplit, int yDownSplit, int xLeftSplit, List<Vector4> caps, int[] yColor, int[] xColor)
     {
         this.yUpSplit = yUpSplit;
         this.yDownSplit = yDownSplit;
@@ -180,6 +229,8 @@ class CalibrationData
         {
             Caps[i] = new Vector4Serializsable(caps[i]);
         }
+        this.xColor = xColor;
+        this.yColor = yColor;
     }
 
     public CalibrationData()

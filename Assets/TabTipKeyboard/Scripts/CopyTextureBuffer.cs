@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
 
 public class CopyTextureBuffer : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class CopyTextureBuffer : MonoBehaviour
     [SerializeField] UnityEngine.UI.Image img;
 
     Texture2D texture_;
+    List<Texture2D> _capsTextures;
+    List<UnityEngine.UI.Image> _capsImages;
+    List<GameObject> _capsGOs;
     Color32[] pixels_;
     GCHandle handle_;
     IntPtr ptr_ = IntPtr.Zero;
@@ -42,6 +46,34 @@ public class CopyTextureBuffer : MonoBehaviour
         UpdateTexture();
     }
 
+    public void AddCap(Vector4 cap, Vector2Int colorCoords)
+    {
+        var width = uddTexture.monitor.width;
+        var height = uddTexture.monitor.height;
+
+        var yUp = cap.x;
+        var yDown = cap.y;
+        var xLeft = cap.z;
+        var xRight = cap.w;
+        var color = texture_.GetPixel(colorCoords.x, colorCoords.y);
+
+        var texture = new Texture2D(width, height, TextureFormat.ARGB32, false);
+        texture_.filterMode = FilterMode.Bilinear;
+        pixels_ = texture_.GetPixels32();
+        handle_ = GCHandle.Alloc(pixels_, GCHandleType.Pinned);
+        ptr_ = handle_.AddrOfPinnedObject();
+
+        var tempGo = new GameObject();
+        UnityEngine.UI.Image capImage = tempGo.AddComponent<UnityEngine.UI.Image>();
+        capImage.sprite = Sprite.Create(texture_, GetKeyboardRectangle(), new Vector2(0, 0));
+        tempGo.GetComponent<RectTransform>().SetParent(this.transform);
+        tempGo.SetActive(true);
+
+        _capsImages.Add(capImage);
+        _capsGOs.Add(tempGo);
+        _capsTextures.Add(texture);
+    }
+
     void OnDestroy()
     {
         if (ptr_ != IntPtr.Zero)
@@ -49,7 +81,6 @@ public class CopyTextureBuffer : MonoBehaviour
             handle_.Free();
         }
     }
-
 
     void Update()
     {
@@ -75,7 +106,7 @@ public class CopyTextureBuffer : MonoBehaviour
         var width = uddTexture.monitor.width;
         var height = uddTexture.monitor.height;
 
-        // TextureFormat.BGRA32 should be set but it causes an error now.
+        //TextureFormat.BGRA32 should be set but it causes an error now.
         texture_ = new Texture2D(width, height, TextureFormat.ARGB32, false);
         texture_.filterMode = FilterMode.Bilinear;
         pixels_ = texture_.GetPixels32();
@@ -102,5 +133,13 @@ public class CopyTextureBuffer : MonoBehaviour
 
         texture_.SetPixels32(pixels_);
         texture_.Apply();
+    }
+
+    public void LoadAllCaps(List<Vector4> caps, int[] yColor, int[] xColor)
+    {
+        for(int i = 0; i < caps.Count; ++i)
+        {
+            AddCap(caps[i], new Vector2Int(xColor[i], yColor[i]));
+        }
     }
 }

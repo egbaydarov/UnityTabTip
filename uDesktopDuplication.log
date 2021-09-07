@@ -1,16 +1,16 @@
-[uDD::Log][2021-09-06 23:33:21] Start
-[uDD::Log][2021-09-06 23:33:21] OS Version    : 10.0
-[uDD::Log][2021-09-06 23:33:21] Build Number  : 19043
-[uDD::Log][2021-09-06 23:33:21] Service Pack  : 
-[uDD::Log][2021-09-06 23:33:21] Graphics Card [0] : NVIDIA GeForce GTX 1060 6GB
-[uDD::Log][2021-09-06 23:33:21]   > Monitor[0] : \\.\DISPLAY1
-[uDD::Log][2021-09-06 23:33:21] Graphics Card [1] : Microsoft Basic Render Driver
-[uDD::Log][2021-09-06 23:33:21] Monitor::Initialized() =>
-[uDD::Log][2021-09-06 23:33:21]     ID    : 0
-[uDD::Log][2021-09-06 23:33:21]     Size  : (1920, 1080)
-[uDD::Log][2021-09-06 23:33:21]     DPI   : (102, 102)
-[uDD::Log][2021-09-06 23:33:21]     Rot   : Landscape
-[uDD::Log][2021-09-06 23:33:21] Duplicator::Initialize() => OK.
-[uDD::Err][2021-09-06 23:33:22] Monitor::GetBuffer() => CopyTextureFromGpuToCpu() has not been called yet.
-[uDD::Err][2021-09-06 23:33:22] Monitor::GetBuffer() => CopyTextureFromGpuToCpu() has not been called yet.
-[uDD::Log][2021-09-06 23:34:29] Stop
+[uDD::Log][2021-09-07 23:00:09] Start
+[uDD::Log][2021-09-07 23:00:09] OS Version    : 10.0
+[uDD::Log][2021-09-07 23:00:09] Build Number  : 19043
+[uDD::Log][2021-09-07 23:00:09] Service Pack  : 
+[uDD::Log][2021-09-07 23:00:09] Graphics Card [0] : NVIDIA GeForce GTX 1060 6GB
+[uDD::Log][2021-09-07 23:00:09]   > Monitor[0] : \\.\DISPLAY1
+[uDD::Log][2021-09-07 23:00:09] Graphics Card [1] : Microsoft Basic Render Driver
+[uDD::Log][2021-09-07 23:00:09] Monitor::Initialized() =>
+[uDD::Log][2021-09-07 23:00:09]     ID    : 0
+[uDD::Log][2021-09-07 23:00:09]     Size  : (1920, 1080)
+[uDD::Log][2021-09-07 23:00:09]     DPI   : (102, 102)
+[uDD::Log][2021-09-07 23:00:09]     Rot   : Landscape
+[uDD::Log][2021-09-07 23:00:09] Duplicator::Initialize() => OK.
+[uDD::Err][2021-09-07 23:00:09] Monitor::GetBuffer() => CopyTextureFromGpuToCpu() has not been called yet.
+[uDD::Err][2021-09-07 23:00:10] Monitor::GetBuffer() => CopyTextureFromGpuToCpu() has not been called yet.
+[uDD::Log][2021-09-07 23:03:09] Stop

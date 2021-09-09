@@ -124,6 +124,10 @@ public class MonitorToKeyboard : MonoBehaviour
     {
         LoadCalibratedData();
         keyboardTexture.UpdateTexutreWithBorders(yUpSplit, yDownSplit, xLeftSplit, xRightSplit);
+    }
+
+    public void LoadCaps()
+    {
         keyboardTexture.LoadAllCaps(Caps, yColor, xColor);
     }
 
@@ -184,13 +188,13 @@ public class MonitorToKeyboard : MonoBehaviour
                 data = (CalibrationData)bf.Deserialize(stream);
             }
 
-            Caps = data.getUnityVectors();
             yUpSplit = data.yUpSplit;
             xRightSplit = data.xRightSplit;
             yDownSplit = data.yDownSplit;
             xLeftSplit = data.xLeftSplit;
             xColor = data.xColor;
             yColor = data.yColor;
+            Caps = data.getUnityVectors();
             Debug.Log("Calibration data loaded!");
         }
         else

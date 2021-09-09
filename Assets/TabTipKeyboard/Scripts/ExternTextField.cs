@@ -33,7 +33,7 @@ public class ExternTextField : MonoBehaviour
 
     private void Update()
     {
-        if(TFProc == null || TFProc.HasExited)
+        if (TFProc == null || TFProc.HasExited)
         {
             RestartApp();
         }
@@ -65,7 +65,7 @@ public class ExternTextField : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        TFProc.Kill();
+        TFProc?.Kill();
         IsSharedMomeryReachable = false;
         //closeOnscreenKeyboard(); //TODO FIX COM EXCEPTION
     }

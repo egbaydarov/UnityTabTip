@@ -72,7 +72,6 @@ public class CopyTextureBuffer : MonoBehaviour
         var color = texture_.GetPixel(colorCoords.x, colorCoords.y);
         var rectangle = new Rect(xLeft, yUp, xRight - xLeft, yDown - yUp);
         var center = new Vector2((xRight + xLeft) / 2.0f, (yDown + yUp) / 2.0f) - imgCenter;
-
         var texture = new Texture2D(width, height, TextureFormat.ARGB32, false);
         var pixels = texture.GetPixels32();
         for (int i = 0; i < pixels.Length; i++)
@@ -117,7 +116,10 @@ public class CopyTextureBuffer : MonoBehaviour
             UpdateTexture();
         }
 
-        CopyTexture();
+        if(CopyTexture() && _capsGOs.Count == 0)
+        {
+            FindObjectOfType<MonitorToKeyboard>().LoadCaps();
+        }
     }
 
     public Vector3 ImageVectorToDesktopPos(Vector3 ImageLocalPosition)
@@ -147,10 +149,10 @@ public class CopyTextureBuffer : MonoBehaviour
         img.sprite = Sprite.Create(texture_, GetKeyboardRectangle(), new Vector2(0, 0));
     }
 
-    void CopyTexture()
+    bool CopyTexture()
     {
         var buffer = uddTexture.monitor.buffer;
-        if (buffer == IntPtr.Zero) return;
+        if (buffer == IntPtr.Zero) return false;
 
         var width = uddTexture.monitor.width;
         var height = uddTexture.monitor.height;
@@ -158,6 +160,8 @@ public class CopyTextureBuffer : MonoBehaviour
 
         texture_.SetPixels32(pixels_);
         texture_.Apply();
+
+        return true;
     }
 
     public void LoadAllCaps(List<Vector4> caps, int[] yColor, int[] xColor)

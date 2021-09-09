@@ -19,10 +19,8 @@
 /// @cond
 namespace Gvr.Internal
 {
-    using Gvr;
     using System.Collections.Generic;
 #if UNITY_EDITOR
-    using UnityEditor;
 #endif // UNITY_EDITOR
     using UnityEngine;
 
@@ -48,9 +46,13 @@ namespace Gvr.Internal
             {
 #if UNITY_EDITOR
                 UnityEditor.XR.Daydream.SupportedHeadTracking minTrackingState
+#pragma warning disable CS0618 // Тип или член устарел
                         = UnityEditor.PlayerSettings.VRDaydream.minimumSupportedHeadTracking;
+#pragma warning restore CS0618 // Тип или член устарел
                 UnityEditor.XR.Daydream.SupportedHeadTracking maxTrackingState
+#pragma warning disable CS0618 // Тип или член устарел
                         = UnityEditor.PlayerSettings.VRDaydream.maximumSupportedHeadTracking;
+#pragma warning restore CS0618 // Тип или член устарел
 
                 if (minTrackingState == UnityEditor.XR.Daydream.SupportedHeadTracking.ThreeDoF
                     && maxTrackingState == UnityEditor.XR.Daydream.SupportedHeadTracking.ThreeDoF)

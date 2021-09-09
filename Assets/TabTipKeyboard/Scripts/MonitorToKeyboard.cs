@@ -40,6 +40,7 @@ public class MonitorToKeyboard : MonoBehaviour
     public void RunCalibrate()
     {
         Caps.Clear();
+        keyboardTexture.DestroyCaps();
         tipsDisabler.EnableDisableTips(true);
 
         int pointsCounter = 0;

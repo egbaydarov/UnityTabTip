@@ -303,6 +303,10 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.m_NumColorKeys
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1225896218, guid: 34c21f523e72f45509a4e37ed0293c3b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1820761120, guid: 34c21f523e72f45509a4e37ed0293c3b, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -358,6 +362,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114000013395929458, guid: 34c21f523e72f45509a4e37ed0293c3b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013899574178, guid: 34c21f523e72f45509a4e37ed0293c3b,
         type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -494,7 +503,13 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 735455564}
   m_PrefabAsset: {fileID: 0}
---- !u!43 &826336839
+--- !u!4 &1106479523 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4000013889601590, guid: 4d293c8e162f3874b982baadd71153d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1693324691}
+  m_PrefabAsset: {fileID: 0}
+--- !u!43 &1355986722
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -657,13 +672,7 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!4 &1106479523 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4000013889601590, guid: 4d293c8e162f3874b982baadd71153d2,
-    type: 3}
-  m_PrefabInstance: {fileID: 1693324691}
-  m_PrefabAsset: {fileID: 0}
---- !u!21 &1647299481
+--- !u!21 &1494441987
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -755,11 +764,11 @@ PrefabInstance:
     - target: {fileID: 2348914, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1647299481}
+      objectReference: {fileID: 1494441987}
     - target: {fileID: 3380982, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 826336839}
+      objectReference: {fileID: 1355986722}
     - target: {fileID: 1000014254142504, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}
       propertyPath: m_TagString
       value: MainCamera

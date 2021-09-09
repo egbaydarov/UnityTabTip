@@ -9,9 +9,9 @@ public class CopyTextureBuffer : MonoBehaviour
     [SerializeField] UnityEngine.UI.Image img;
 
     Texture2D texture_;
-    List<Texture2D> _capsTextures;
-    List<UnityEngine.UI.Image> _capsImages;
-    List<GameObject> _capsGOs;
+    List<Texture2D> _capsTextures = new List<Texture2D>();
+    List<UnityEngine.UI.Image> _capsImages = new List<UnityEngine.UI.Image>();
+    List<GameObject> _capsGOs = new List<GameObject>();
     Color32[] pixels_;
     GCHandle handle_;
     IntPtr ptr_ = IntPtr.Zero;
@@ -32,9 +32,23 @@ public class CopyTextureBuffer : MonoBehaviour
     int xLeftSplit;
     int xRightSplit;
 
+    Vector2 imgCenter => new Vector2((xRightSplit + xLeftSplit) / 2.0f, (yDownSplit + yUpSplit) / 2.0f);
+
     Rect GetKeyboardRectangle()
     {
         return new Rect(xLeftSplit, yUpSplit, xRightSplit - xLeftSplit, yDownSplit - yUpSplit);
+    }
+
+    internal void DestroyCaps()
+    {
+        for (int i = 0; i < _capsGOs.Count; ++i)
+        {
+            Destroy(_capsGOs[i]);
+        }
+
+        _capsGOs.Clear();
+        _capsImages.Clear();
+        _capsTextures.Clear();
     }
 
     public void UpdateTexutreWithBorders(int yUpSplit, int yDownSplit,int xLeftSplit, int xRightSplit)
@@ -57,21 +71,31 @@ public class CopyTextureBuffer : MonoBehaviour
         var xRight = cap.w;
         var color = texture_.GetPixel(colorCoords.x, colorCoords.y);
         var rectangle = new Rect(xLeft, yUp, xRight - xLeft, yDown - yUp);
+        var center = new Vector2((xRight + xLeft) / 2.0f, (yDown + yUp) / 2.0f) - imgCenter;
 
         var texture = new Texture2D(width, height, TextureFormat.ARGB32, false);
-        texture_.filterMode = FilterMode.Bilinear;
-        pixels_ = texture_.GetPixels32();
-        handle_ = GCHandle.Alloc(pixels_, GCHandleType.Pinned);
-        ptr_ = handle_.AddrOfPinnedObject();
+        var pixels = texture.GetPixels32();
+        for (int i = 0; i < pixels.Length; i++)
+        {
+            pixels[i] = color;
+        }
+        texture.SetPixels32(pixels);
+        texture.Apply();
 
         var tempGo = new GameObject();
         UnityEngine.UI.Image capImage = tempGo.AddComponent<UnityEngine.UI.Image>();
-        capImage.sprite = Sprite.Create(texture_, rectangle, new Vector2(0, 0));
+        capImage.sprite = Sprite.Create(texture, rectangle, new Vector2(0, 0));
         tempGo.GetComponent<RectTransform>().SetParent(this.transform);
+        tempGo.transform.localScale = img.gameObject.transform.localScale;
+        tempGo.transform.localRotation = img.gameObject.transform.localRotation;
+        var rect = tempGo.GetComponent<RectTransform>();
+        rect.sizeDelta = new Vector2(xRight - xLeft, yDown - yUp);
+        tempGo.transform.localPosition = new Vector3(center.x, -center.y);
         tempGo.SetActive(true);
 
         _capsImages.Add(capImage);
         _capsGOs.Add(tempGo);
+
         _capsTextures.Add(texture);
     }
 

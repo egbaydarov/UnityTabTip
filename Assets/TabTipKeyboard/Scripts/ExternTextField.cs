@@ -14,6 +14,8 @@ public class ExternTextField : MonoBehaviour
     System.Diagnostics.Process TFProc;
     System.Diagnostics.Process TabTipProc;
 
+    private TMP_InputField _inputField;
+
     [SerializeField]
     const int MMF_MAX_SIZE = 1024;
     [SerializeField]
@@ -25,8 +27,6 @@ public class ExternTextField : MonoBehaviour
 
     private void OnGUI()
     {
-        GUI.TextField(new Rect(10, 10, 300, 30), ExternTextFieldData, MMF_VIEW_SIZE);
-
         if (GUI.Button(new Rect(10, 45, 110, 30), new GUIContent("Show Keyboard")))
             ShowKeyboard();
     }
@@ -49,12 +49,22 @@ public class ExternTextField : MonoBehaviour
         using (var mmvStream = mmf.CreateViewStream(0, MMF_VIEW_SIZE))
         {
             TextFieldDataStream = mmvStream;
-            while (IsSharedMomeryReachable) ;
+            while (IsSharedMomeryReachable)
+            {
+                Thread.Sleep(100);
+            }
         }
     }
 
     private void Start()
     {
+        if(_inputField == null)
+        {
+            Dubug.LogError("InputField property didn't set up. You should do that in inspector. Disabling.");
+            enabled = false;
+            return;
+        }
+
         Thread textUpdate = new Thread(new ThreadStart(SharedMemorySetup));
         textUpdate.IsBackground = true;
         textUpdate.Start();

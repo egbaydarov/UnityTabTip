@@ -3,6 +3,7 @@ using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Runtime.InteropServices;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 
 
@@ -14,6 +15,7 @@ public class ExternTextField : MonoBehaviour
     System.Diagnostics.Process TFProc;
     System.Diagnostics.Process TabTipProc;
 
+    [SerializeField]
     private TMP_InputField _inputField;
 
     [SerializeField]
@@ -39,6 +41,7 @@ public class ExternTextField : MonoBehaviour
         }
         TextReader textReader = new StreamReader(TextFieldDataStream);
         ExternTextFieldData = textReader.ReadLine();
+        _inputField.text = ExternTextFieldData;
         TextFieldDataStream.Seek(0, SeekOrigin.Begin);
     }
 
@@ -60,7 +63,7 @@ public class ExternTextField : MonoBehaviour
     {
         if(_inputField == null)
         {
-            Dubug.LogError("InputField property didn't set up. You should do that in inspector. Disabling.");
+            Debug.LogError("InputField property didn't set up. You should do that in inspector. Disabling.");
             enabled = false;
             return;
         }

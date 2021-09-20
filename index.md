@@ -1,37 +1,42 @@
-## Welcome to GitHub Pages
+## Unity Tab Tip Keyboard 
+Quick Start
 
-You can use the [editor on GitHub](https://github.com/egbaydarov/UnityTabTip/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+### First
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+1. Download [unitypackage](https://egbaydarov.github.io/UnityTabTip/doxygen/hierarchy.html)
+2. Unpack it into your project
 
-### Markdown
+### Second
+You should setup some objects in scene
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+1. Add a KeyboardManager prefub instance inside canvas in your scene
+2. Setup canvas and scene for pointer event handling
 
-```markdown
-Syntax highlighted code block
+Example:
 
-# Header 1
-## Header 2
-### Header 3
+![Image](https://raw.githubusercontent.com/egbaydarov/UnityTabTip/gh-pages/photo_2021-09-20%2023.42.52.jpeg)
 
-- Bulleted
-- List
+Add TMP_InputField GameObject
 
-1. Numbered
-2. List
+![Image](https://raw.githubusercontent.com/egbaydarov/UnityTabTip/gh-pages/photo_2021-09-20%2023.42.48.jpeg)
 
-**Bold** and _Italic_ and `Code` text
+Specify reference to it in inspector
 
-[Link](url) and ![Image](src)
-```
+![Image](https://raw.githubusercontent.com/egbaydarov/UnityTabTip/gh-pages/photo_2021-09-20%2023.42.56.jpeg)
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### Calibrate and setup keyboard as you want
+Click on "Сalibrate Keyboard Texture"
 
-### Jekyll Themes
+![Image](https://raw.githubusercontent.com/egbaydarov/UnityTabTip/gh-pages/photo_2021-09-20%2023.42.45.jpeg)
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/egbaydarov/UnityTabTip/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Then follow instructions on screen
 
-### Support or Contact
+![Image](https://raw.githubusercontent.com/egbaydarov/UnityTabTip/gh-pages/2021-09-20%2023.42.29.jpg)
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+In addition you can add cap to cover unneccessary parts of keyboard
+
+![Image](https://raw.githubusercontent.com/egbaydarov/UnityTabTip/gh-pages/photo_2021-09-20%2023.42.41.jpeg)
+
+### Asset Class Reference
+
+Doxygen generated class reference [here](https://egbaydarov.github.io/UnityTabTip/doxygen/hierarchy.html)

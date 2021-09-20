@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.nigga.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "C:\\Users\\VR_User\\Desktop\\nigga\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "C:\\Users\\VR_User\\Desktop\\UnityTabTip\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
           "name": "nigga [Testing]"
